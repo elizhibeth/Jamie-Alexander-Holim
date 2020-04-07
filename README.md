@@ -32,9 +32,9 @@ open
 <html>
 <body>
 
-<h1>My First Heading</h1>
+<h1>I Love You</h1>
 
-<p>My first paragraph.</p>
+<p>forever and always.</p>
 
 </body>
 </html>
