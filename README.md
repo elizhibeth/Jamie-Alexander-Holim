@@ -40,3 +40,59 @@ https://devcenter.heroku.com/articles/dyno-sleeping
 web.1: up 2019/07/08 17:42:57 -0500 (~ 7s ago)
 ps:scale web=0
 open
+<dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 14.266 s
+[INFO] Finished at: 2019-07-08T17:43:29-05:00
+[INFO] Final Memory: 37M/331M
+[INFO] ------------------------------------------------------------------------
+<plugin>
+  <artifactId>maven-assembly-plugin</artifactId>
+  <version>3.0.0</version>
+  <configuration>
+    <descriptorRefs>
+      <descriptorRef>jar-with-dependencies</descriptorRef>
+    </descriptorRefs>
+    <finalName>I love you</finalName>
+  </configuration>
+</plugin>
+...
+7:06:33 PM web.1 |  2019-04-04 19:06:33.539  INFO 97226 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+7:06:33 PM web.1 |  2019-04-04 19:06:33.783  INFO 97226 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+7:06:33 PM web.1 |  2019-04-04 19:06:33.949  INFO 97226 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+7:06:34 PM web.1 |  2019-04-04 19:06:34.047  INFO 97226 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5000 (http) with context path ''
+<dependency>
+  <groupId>org.jscience</groupId>
+  <artifactId>jscience</artifactId>
+  <version>4.3.1</version>
+</dependency>
+import static javax.measure.unit.SI.KILOGRAM;
+import javax.measure.quantity.Mass;
+import org.jscience.physics.model.RelativisticModel;
+import org.jscience.physics.amount.Amount;
+@RequestMapping("/hello")
+String hello(Map<String, Object> model) {
+    RelativisticModel.select();
+    Amount<Mass> m = Amount.valueOf("12 GeV").to(KILOGRAM);
+    model.put("science", "E=mc^2: 12 GeV = " + m.toString());
+    return "hello";
+}
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'hello')}">
+<body>
+  <div class="container">
+    <p th:text="${science}"/>
+  </div>
+</body>
+</html>
